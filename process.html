@@ -5,99 +5,359 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Description of the development process">
     <meta name="keywords" content="development, process, planning, design, prototyping">
-    <meta name="author" content="Your Name">
-    <title>Development Process</title>
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYKFB1BGKC"></script>
-  <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-CYKFB1BGKC');
-  </script>
+    <meta name="author" content="Abamwesiga Kasisi">
+    <title>Development Process - ABBA Web Dev</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" href="https://pbs.twimg.com/media/Gjs_4yjbwAA5tc4?format=png&name=small">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYKFB1BGKC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-CYKFB1BGKC');
+    </script>
     <style>
+        :root {
+            --primary-color: #15202B;
+            --secondary-color: #1DA1F2;
+            --accent-color: #1DA1F2;
+            --text-color: #FFFFFF;
+            --background-color: #192734;
+            --card-background: #253341;
+            --border-color: #38444D;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
         }
 
         .process {
-            padding: 20px;
-            background-color: #fff;
-            margin: 20px auto;
+            padding: 100px 1rem 5rem;
+            min-height: 100vh;
             max-width: 800px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
         }
 
         .process h2 {
             text-align: center;
-            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         .process-steps {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 1.5rem;
         }
 
         .step {
             display: flex;
             align-items: center;
-            background-color: #e9e9e9;
-            padding: 10px;
-            border-radius: 5px;
+            background: var(--card-background);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-3px);
         }
 
         .step-number {
-            font-size: 1.5em;
-            color: #fff;
-            background-color: #007bff;
+            font-size: 1.2rem;
+            color: var(--text-color);
+            background: var(--secondary-color);
             border-radius: 50%;
             width: 40px;
             height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 15px;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
         }
 
-        .step h3 {
-            margin: 0;
-            color: #007bff;
+        .step-content h3 {
+            margin: 0 0 0.5rem;
+            color: var(--secondary-color);
         }
 
-        .step p {
+        .step-content p {
             margin: 0;
-            color: #666;
+            color: #8899A6;
+            line-height: 1.6;
         }
+
+        .cta-button {
+            display: inline-flex;
+            padding: 0.8rem 2rem;
+            background: var(--secondary-color);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 9999px;
+            font-weight: bold;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            margin: 2rem auto 0;
+        }
+
+        .cta-button:hover {
+            background: #1991DA;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .process {
+                padding-top: 80px;
+            }
+            
+            .step {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+        /* Navigation Styles */
+header {
+    background: var(--primary-color);
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+}
+
+nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+.phone-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+/* Footer Styles */
+footer {
+    background: var(--primary-color);
+    color: var(--text-color);
+    padding: 3rem 1rem;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.social-links {
+    margin: 2rem 0;
+}
+
+.social-links a {
+    color: var(--text-color);
+    margin: 0 1rem;
+    font-size: 1.5rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--secondary-color);
+}
+
+.legal-links {
+    margin-top: 2rem;
+}
+
+.legal-links a {
+    color: var(--text-color);
+    margin: 0 1rem;
+    text-decoration: none;
+}
+
+/* Mobile Menu Toggle */
+@media (max-width: 768px) {
+    nav {
+        padding: 0 1rem; /* Add padding to nav container */
+    }
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--primary-color);
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+    
+    .phone-cta {
+        display: none;
+    }
+}
     </style>
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4668250134485701"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-<section class="process">
-    <h2>Development Process</h2>
-    <div class="process-steps">
-        <div class="step">
-            <div class="step-number">1</div>
-            <h3>Discovery & Planning</h3>
-            <p>Requirements analysis and project scoping</p>
+    <header>
+        <nav>
+            <div class="logo">ABBA Web Dev</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#services">Services</a>
+                <a href="projects.html">Projects</a>
+                <a href="process.html">Process</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="index.html#contact">Contact</a>
+                <a href="tel:+255697349592" class="phone-cta">
+                    <i class="fas fa-phone"></i>
+                </a>
+            </div>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="process">
+        <h2>Development Process</h2>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Discovery & Planning</h3>
+                    <p>Requirements analysis and project scoping</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Design & Prototyping</h3>
+                    <p>UI/UX design and client approval</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Development</h3>
+                    <p>Agile implementation with modern technologies</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Testing & Quality Assurance</h3>
+                    <p>Comprehensive testing across devices</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h3>Deployment & Launch</h3>
+                    <p>Secure deployment and final handover</p>
+                </div>
+            </div>
         </div>
-        <div class="step">
-            <div class="step-number">2</div>
-            <h3>Design & Prototyping</h3>
-            <p>UI/UX design and client approval</p>
+
+        <button class="cta-button" onclick="navigateHome()">Back to Home</button>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://wa.me/+255697349592" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="https://twitter.com/_itsabba" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/abamwesiga-kasisi" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Abamwesiga" target="_blank"><i class="fab fa-github"></i></a>
         </div>
-    <!-- Add more steps -->
-    </div>
-    </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <button onclick="navigateHome()" style="background-color: #007bff; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Back to Home</button>
-    </div>
-</section>
-<script>
-    function navigateHome() {
-        window.location.href = 'index.html';
-    }
-</script>
+        <div class="legal-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="cookies.html">Cookie Policy</a>
+        </div>
+        <p>&copy; 2025 ABBA Web Dev. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function navigateHome() {
+            window.location.href = 'index.html';
+        }
+
+        // Mobile menu toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
