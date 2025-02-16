@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ABBA Web Dev | Professional Web Development</title>
-    <meta name="description" content="Professional web development services in Tanzania - Custom websites and SEO services by ABBA Web Dev">
+    <meta name="description" content="Professional web development services in Tanzania - Custom websites, and SEO services by ABBA Web Dev">
     <meta name="keywords" content="web development Tanzania, website design, SEO services">
     <meta name="author" content="Abamwesiga Kasisi">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="https://pbs.twimg.com/media/Gjs_4yjbwAA5tc4?format=png&name=small">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -216,6 +217,51 @@
             color: var(--text-color);
         }
 
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            color: white;
+            z-index: 1000;
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        .toast.success {
+            background-color: #10B981;
+        }
+
+        .toast.error {
+            background-color: #EF4444;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         footer {
             background: var(--primary-color);
             color: var(--text-color);
@@ -293,6 +339,11 @@
             color: var(--secondary-color);
             margin-left: 0.3rem;
         }
+
+        button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
     </style>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYKFB1BGKC"></script>
     <script>
@@ -301,8 +352,7 @@
         gtag('js', new Date());
         gtag('config', 'G-CYKFB1BGKC');
     </script>
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4668250134485701"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4668250134485701" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -342,7 +392,7 @@
                 <p>With several months of experience crafting digital solutions, I specialize in creating responsive, user-friendly websites that drive business growth. Based in Tanzania, I combine technical expertise with creative problem-solving to deliver exceptional results.</p>
                 <div class="experience">
                     <div class="exp-item">
-                        <h4>10+</h4>
+                        <h4>5+</h4>
                         <p>Projects Completed</p>
                     </div>
                     <div class="exp-item">
@@ -383,13 +433,18 @@
                 </ul>
             </div>
             <div class="service-card">
-                <i class="fas fa-search service-icon"></i>
-                <h3>SEO Services</h3>
-                <p>Search engine optimization strategies</p>
+                <!-- UI Design Icon -->
+<i class="fas fa-laptop service-icon"></i>
+
+<!-- UX Design Icon -->
+<i class="fas fa-user-cog service-icon"></i>
+
+                <h3>UI and UX design</h3>
+                <p>User Interface & User Experience design</p>
                 <ul class="service-features">
-                    <li>Keyword Research</li>
-                    <li>On-Page SEO</li>
-                    <li>Performance Tracking</li>
+                    <li>Visual aspects of a website</li>
+                    <li>Overall User Experience</li>
+                    <li>Beautiful and Functional Website</li>
                 </ul>
             </div>
         </div>
@@ -397,27 +452,31 @@
 
     <section class="contact" id="contact">
         <h2>Get In Touch</h2>
-        <form class="contact-form" id="contactForm" action="mailto:abamwesigakasisi2006@gmail.com" method="post" enctype="text/plain">
+        <form class="contact-form" id="contactForm">
             <div class="form-group">
-                <input type="text" placeholder="Your Name" required>
+                <input type="text" name="user_name" placeholder="Your Name" required>
             </div>
             <div class="form-group">
-                <input type="email" placeholder="Your Email" required>
+                <input type="email" name="user_email" placeholder="Your Email" required>
             </div>
             <div class="form-group">
-                <input type="tel" placeholder="Phone Number" required>
+                <input type="tel" name="user_phone" placeholder="Phone Number" required>
             </div>
             <div class="form-group">
-                <select required>
+                <select name="service" required>
                     <option value="">Select Service</option>
-                    <option>Web Development</option>
-                    <option>SEO</option>
+                    <option value="web_development">Web Development</option>
+                    <option value="seo">SEO</option>
+                    <option value="seo">UI & UX Design</option>
                 </select>
             </div>
             <div class="form-group">
-                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="cta-button">Send Message</button>
+            <button type="submit" class="cta-button" id="submitButton">
+                <span id="buttonText">Send Message</span>
+                <span id="loadingSpinner" class="loading" style="display: none;"></span>
+            </button>
         </form>
     </section>
 
@@ -437,6 +496,54 @@
     </footer>
 
     <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("V8-zpzl9P6Lhe2gQ-"); // Replace with your EmailJS public key
+        })();
+
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitButton = document.getElementById('submitButton');
+            const buttonText = document.getElementById('buttonText');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            buttonText.style.display = 'none';
+            loadingSpinner.style.display = 'inline-block';
+
+            emailjs.sendForm('service_ujwt8cm', 'template_hp5yyxp', this)
+                .then(() => {
+                    showToast('Message sent successfully!', 'success');
+                    this.reset();
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    showToast('Failed to send message. Please try again.', 'error');
+                })
+                .finally(() => {
+                    // Reset button state
+                    submitButton.disabled = false;
+                    buttonText.style.display = 'inline';
+                    loadingSpinner.style.display = 'none';
+                });
+        });
+
+        // Toast notification function
+        function showToast(message, type) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // Navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -446,12 +553,7 @@
             });
         });
 
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will respond shortly.');
-            this.reset();
-        });
-
+        // Mobile menu
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
@@ -465,6 +567,7 @@
             }
         });
 
+        // Sticky header
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             header.classList.toggle('sticky', window.scrollY > 0);
